@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-
+//{max } != (max) 
+// ({max}) : goi "max" tuong duong props.max
+//Nếu chỉ có (max) :  muon goij props.max phai goi la max.max
+// 
 function Timer({max}){
 const [count, setCount] = useState(0);
 

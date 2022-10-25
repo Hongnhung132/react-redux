@@ -1,14 +1,27 @@
 import React, { Component } from 'react';
 class SingleCounter extends Component {
     constructor(props){
-        super(props);
-        this.state={
+        // props: Được truyền từ 1 component khác  sang component 
+        super(props); // Nó như một cái object
+        // props: {
+        //     x : 3, 
+        //     y : "u"
+        //     }
+        // props.x , props.y để gọi
+        this.state = {
             count: 0,
             isActivate: false
         }
+        
+        // Không set trực tiếp dc nên dùng this.setSate
+
     }
 
-    handleChangeCount(event){
+    handleChangeCount = (event) => {
+        // bind(this) hoặc dùng arrow function 
+        //const <functionname> = ([<params>]) => {
+        //}
+        // this.state.count.bind(this)
         event.preventDefault();
         this.setState({
             count: (event.target.validity.valid) ? event.target.value : this.state.count
@@ -16,13 +29,13 @@ class SingleCounter extends Component {
     }
     handleIncrease = () => {
         this.setState({
-            count: this.state.count+1
+            count: this.state.count + 1
         });
     }
     handleDecrease = () => {
         if (this.state.count>0){
             this.setState({
-                count: this.state.count-1
+                count: this.state.count -1
             });
         }
     }
@@ -56,7 +69,7 @@ class SingleCounter extends Component {
         return (
             <div>
                 <br/>
-                <input type='text' pattern='[0-9]*' size='15' onChange={this.handleChangeCount.bind(this)} value={this.state.count} name='countInput'/>
+                <input type='text' pattern='[0-9]*' size='15' onChange={this.handleChangeCount} value={this.state.count} name='countInput'/>
                 <br/>
                 <button onClick={this.handleIncrease} className=''>+</button>
                 <button onClick={this.handleDecrease} className=''>-</button>
@@ -65,7 +78,8 @@ class SingleCounter extends Component {
                     this.startTimer.bind(this)} className=''>
                         {this.state.isActivate ? `Stop` : `Start`}
                 </button>
-                <button style={{display: this.props.showDelete? '' : 'none'}}
+                <button 
+                style={{display: this.props.showDelete? '' : 'none'}}
                     onClick={()=>this.props.deleteCounter(this.props.id)}>
                         Delete
                 </button>
