@@ -1,8 +1,9 @@
 
 import './App.css';
-// import Single from './components/withoutRedux/Single';
 import SingleCounter  from './components/withoutRedux/SingleCounter';
 import  MultiCounterWithoutRedux from './components/withoutRedux/MultiCounter'; 
+import SingleCounterRedux from'./components/withRedux/SingleCounterRedux';
+import MultiCounterRedux from'./components/withRedux/MultiCounterRedux';
 
 function App() {
   return (
@@ -11,6 +12,10 @@ function App() {
       <SingleCounter />
       <h3>2. Multi Counter Without Redux</h3>
       <MultiCounterWithoutRedux />
+      <h3>3. Single Counter With Redux</h3>
+      <SingleCounterRedux />
+      <h3>4. Multi Counter With Redux</h3>
+      <MultiCounterRedux />
 
     </div>
   );

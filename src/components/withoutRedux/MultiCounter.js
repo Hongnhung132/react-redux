@@ -4,7 +4,7 @@ import SingleCounter from './SingleCounter';
 function MultiCounter() {
 
     const [arrCounter, setArrCounter] = React.useState([{
-       id: 0, 
+          
        //value:  <SingleCounter key={0} id={0}  deleteCounter= {() => deleteCounter(0)} />
     }   
     ]);
@@ -35,11 +35,11 @@ function MultiCounter() {
         <div>
             <button onClick={() => addCounter()}> Add Counter</button>
             {arrCounter.map((item, index) => (
-               <SingleCounter key={item.id} id={item.id}  deleteCounter= {() => deleteCounter(item.id)} showDelete={arrCounter.length>1} />  
+               <SingleCounter key={'mt' + item.id} id={item.id}  deleteCounter= {() => deleteCounter(item.id)} showDelete={arrCounter.length>1} />  
             ))}
             
         </div>
     )
 
 }
-export default MultiCounter;
+export default MultiCounter; // 
