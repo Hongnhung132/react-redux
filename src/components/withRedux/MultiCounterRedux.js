@@ -16,7 +16,6 @@ export default function MultiCounterRedux() {
 
     const handleChange = (event, Id) => {
         event.preventDefault();
-
         var val = arrCounter.find(x => x.counterID === Id)
         let payload = event.target.validity.valid ? {
             counterID: Id,

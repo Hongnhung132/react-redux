@@ -9,21 +9,15 @@ class SingleCounter extends Component {
         //     }
         // props.x , props.y để gọi
         this.state = {
+            //count: this.props.initValue??0,
             count: 0,
             isActivate: false
         }
-        
         // Không set trực tiếp dc nên dùng this.setSate
-
     }
 
     handleChangeCount = (event) => {
-        // bind(this) hoặc dùng arrow function 
-        //const <functionname> = ([<params>]) => {
-        //}
-        // this.state.count.bind(this)
-        event.preventDefault(); // js thuan stop even do xay ra 
-       //event.target.validity.valid  check validation tu  0-9 
+        event.preventDefault();
         this.setState({
             count: (event.target.validity.valid) ? parseInt(event.target.value.length > 0 ? event.target.value: 0)  : this.state.count
         })
@@ -36,7 +30,7 @@ class SingleCounter extends Component {
     handleDecrease = () => {
         if (this.state.count>0){
             this.setState({
-                count: this.state.count -1
+                count: this.state.count - 1
             });
         }
     }
@@ -71,7 +65,6 @@ class SingleCounter extends Component {
             <div>
                 <br/>
                 <input type='text' pattern='[0-9]*' size='15' onChange={this.handleChangeCount} value={this.state.count} name='countInput'/>
-                {/* pattern  Regular Expression chi lay gia tri tu 1 - 9, * = [0- 9] chi dc nhap so*/}
                 <br/>
                 <button onClick={this.handleIncrease} className=''>+</button>
                 <button onClick={this.handleDecrease} className=''>-</button>

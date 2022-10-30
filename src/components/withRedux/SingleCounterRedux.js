@@ -8,13 +8,12 @@ function SingleCounterRedux() {
     const isCountingDown = useSelector((state) => state.counter.isCountingDown)
     const dispatch = useDispatch()
    
-    // Xử lý even 
+    
     const handleChangeCount = (event) => {
         event.preventDefault();
         dispatch(changeCount((event.target.validity.valid) ? parseInt(event.target.value.length > 0 ? event.target.value: 0) : count))
     }
-    //??'0/ check giá trị ? là khác null / undified sẽ lấy giá trị phía trc  còn không sẽ lấy sau 
-    //
+   
 
 
     const startCountDown = () =>{
