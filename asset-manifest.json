@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/Hongnhung132/react-redux/static/css/main.1ef3a49a.css",
-    "main.js": "/Hongnhung132/react-redux/static/js/main.858e20db.js",
-    "index.html": "/Hongnhung132/react-redux/index.html",
-    "main.1ef3a49a.css.map": "/Hongnhung132/react-redux/static/css/main.1ef3a49a.css.map",
-    "main.858e20db.js.map": "/Hongnhung132/react-redux/static/js/main.858e20db.js.map"
+    "main.css": "./static/css/main.1ef3a49a.css",
+    "main.js": "./static/js/main.858e20db.js",
+    "index.html": "./index.html",
+    "main.1ef3a49a.css.map": "./static/css/main.1ef3a49a.css.map",
+    "main.858e20db.js.map": "./static/js/main.858e20db.js.map"
   },
   "entrypoints": [
     "static/css/main.1ef3a49a.css",
