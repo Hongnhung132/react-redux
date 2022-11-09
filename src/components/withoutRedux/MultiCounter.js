@@ -24,13 +24,11 @@ function MultiCounter() {
     return (
         <div>
             <button onClick={() => addCounter()}> Add Counter</button>
-            {arrCounter.map((item, index) => (
-               //<SingleCounter key={'mt' + item.id} id={item.id} initValue={item.id == 0? 0:5}  deleteCounter={() => deleteCounter(item.id)} showDelete={arrCounter.length>1} />  
+            {arrCounter.map((item) => (
                <SingleCounter key={'mt' + item.id} id={item.id}  deleteCounter={() => deleteCounter(item.id)} showDelete={arrCounter.length>1} />  
             ))}
             
         </div>
     )
-
 }
-export default MultiCounter; // 
+export default MultiCounter;

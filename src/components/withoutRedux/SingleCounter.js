@@ -1,36 +1,34 @@
 import React, { Component } from 'react';
 class SingleCounter extends Component {
     constructor(props){
-        // props: Được truyền từ 1 component khác  sang component 
-        super(props);    
-        // props: {
-        //     x : 3, 
-        //     y : "u"
-        //     }
-        // props.x , props.y để gọi
+        super(props);  
         this.state = {
-            //count: this.props.initValue??0,
             count: 0,
+            quantity: 0,
             isActivate: false
         }
-        // Không set trực tiếp dc nên dùng this.setSate
     }
 
-    handleChangeCount = (event) => {
+   
+    handleChangeQuantity = (event) => {
         event.preventDefault();
         this.setState({
-            count: (event.target.validity.valid) ? parseInt(event.target.value.length > 0 ? event.target.value: 0)  : this.state.count
+            quantity: (event.target.validity.valid) ? parseInt(event.target.value.length > 0 ? event.target.value: 0)  : this.state.quantity
         })
     }
     handleIncrease = () => {
         this.setState({
-            count: this.state.count + 1
+            count: this.state.count + this.state.quantity
         });
     }
     handleDecrease = () => {
-        if (this.state.count>0){
+        if (this.state.count > 0){
             this.setState({
-                count: this.state.count - 1
+                // TestCase: Nếu - đi nhỏ hơn 0 thì sao\
+                // Thay vì 
+                //count: this.state.count - this.state.quantity  khi mà giá trị count trừ đi < 0 gán nó = 0 luôn
+                // Thì check điều kiện
+                count: this.state.count - this.state.quantity > 0 ?  this.state.count - this.state.quantity : 0
             });
         }
     }
@@ -63,8 +61,9 @@ class SingleCounter extends Component {
     render() {
         return (
             <div>
+                <p className='content'>Result: {this.state.count}</p>
                 <br/>
-                <input type='text' pattern='[0-9]*' size='15' onChange={this.handleChangeCount} value={this.state.count} name='countInput'/>
+                <input type='text' pattern='[0-9]*' size='15' onChange={this.handleChangeQuantity} value={this.state.quantity} name='quantityInput'/>
                 <br/>
                 <button onClick={this.handleIncrease} className=''>+</button>
                 <button onClick={this.handleDecrease} className=''>-</button>

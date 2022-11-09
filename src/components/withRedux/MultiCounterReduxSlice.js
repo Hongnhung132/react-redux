@@ -5,6 +5,7 @@ export const multiCounterSlice = createSlice({
   initialState: [{
     counterID: 0,
     value: 0,
+    quantity: 0,
     isCountingDown: false,
     timerID: 0,
   }],
@@ -12,12 +13,24 @@ export const multiCounterSlice = createSlice({
     increment: (state, action) => {
       var counter = state.find(x => x.counterID === action.payload);
       if (counter) {
-        counter.value += 1
+        counter.value += counter.quantity
       }
 
     },
 
     decrement: (state, action) => {
+      var counter = state.find(x => x.counterID === action.payload)
+      if (counter) {
+        if((counter.value - counter.quantity) > 0){
+          counter.value -= counter.quantity
+        }
+        else {
+          counter.value = 0
+        }
+      }
+    },
+    
+    decrementDown: (state, action) => {
 
       var counter = state.find(x => x.counterID === action.payload)
       if (counter && counter.value > 0) {
@@ -28,6 +41,7 @@ export const multiCounterSlice = createSlice({
       state.push({
         counterID: action.payload,
         value: 0,
+        quantity: 0,
         isCountingDown: false,
         timerID: 0,
       }
@@ -38,6 +52,12 @@ export const multiCounterSlice = createSlice({
       var val = state.find(x => x.counterID === action.payload.counterID);
       if (val) {
         val.value = action.payload.value;
+      }
+    },
+    changeQuantity: (state, action) => {
+      var val = state.find(x => x.counterID === action.payload.counterID);
+      if (val) {
+        val.quantity = action.payload.quantity;
       }
     },
     setCountingDown:(state, action) => {
@@ -60,6 +80,6 @@ export const multiCounterSlice = createSlice({
     }
   },
 })
-export const { increment, decrement, addCounter, changeCount,setCountingDown, setTimerID, deleteCounter} = multiCounterSlice.actions
+export const { increment, decrement, decrementDown,  addCounter, changeCount,setCountingDown, setTimerID, deleteCounter, changeQuantity} = multiCounterSlice.actions
 
 export default multiCounterSlice.reducer

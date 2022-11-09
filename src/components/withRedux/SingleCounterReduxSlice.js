@@ -5,18 +5,27 @@ export const counterSlice = createSlice({
   initialState: {
     value: 0,
     isCountingDown: false,
+    quantity: 0,
     timerID: 0,
   },
   reducers: {
     increment: (state) => {
-      state.value += 1
+      state.value += state.quantity
     },
     decrement: (state) => {
-      if(state.value > 0 )
+      if((state.value -  state.quantity) > 0)
+        state.value -= state.quantity
+      else
+      {
+        state.value = 0
+      }
+    },
+    decrementDown: (state) => {
+      if(state.value >  0 )
       state.value -= 1
     },
-    changeCount: (state, action) => {
-      state.value = action.payload
+    changeQuantity: (state, action) => {
+      state.quantity = action.payload
     },
     setCountingDown:(state, action) => {
       state.isCountingDown = action.payload  
@@ -26,6 +35,6 @@ export const counterSlice = createSlice({
     }
   },
 })
-export const { increment, decrement, changeCount, setCountingDown, setTimerID } = counterSlice.actions
+export const { increment, decrement, decrementDown, setCountingDown, setTimerID, changeQuantity } = counterSlice.actions
 
 export default counterSlice.reducer

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { increment, decrement, addCounter, changeCount, setCountingDown, setTimerID, deleteCounter } from './MultiCounterReduxSlice'
+import { increment, decrement, addCounter, setCountingDown, setTimerID, deleteCounter, changeQuantity, decrementDown } from './MultiCounterReduxSlice'
 
 export default function MultiCounterRedux() {
     const dispatch = useDispatch()
@@ -13,18 +13,18 @@ export default function MultiCounterRedux() {
     }
 
 
-
-    const handleChange = (event, Id) => {
+    const handleChangeQuantity = (event, Id) => {
         event.preventDefault();
-        var val = arrCounter.find(x => x.counterID === Id)
+        var val = arrCounter.find(x => x.counterID === Id);
+
         let payload = event.target.validity.valid ? {
             counterID: Id,
-            value: parseInt(event.target.value.length > 0 ? event.target.value: 0) 
+            quantity:  parseInt(event.target.value.length > 0 ? event.target.value: 0),
         } : {
             counterID: Id,
-            value: val.counterValue
+            quantity: val.quantity
         };
-        dispatch(changeCount(payload));
+        dispatch(changeQuantity(payload));
     }
     const startCountDown = (Id) => {
         if (Id >= 0) {
@@ -33,7 +33,7 @@ export default function MultiCounterRedux() {
                 isCountingDown: true
             }))
             var timer = setInterval(() => {
-                dispatch(decrement(Id))
+                dispatch(decrementDown(Id))
             }, 1000)
             dispatch(setTimerID({
                 timerID: timer,
@@ -76,24 +76,28 @@ export default function MultiCounterRedux() {
 return (
     <div>
         <button onClick={() => handelAddCounter()}> Add Counter</button>
-        {arrCounter.map((item, index) => (
-            <div key={'mtRedux' + item.counterID} >
-                <br />
-                <input type='text' pattern='[0-9]*' size='15' value={item.value} name='countInput'
-                    onChange={(e) => handleChange(e, item.counterID)}
-                />
-                <br />
-                <button className='' onClick={() => dispatch(increment(item.counterID))}>+</button> &nbsp;
-                <button className='' onClick={() => dispatch(decrement(item.counterID))}>-</button>
-                <br />
-                <button onClick={() => item.isCountingDown ? stopCounter(item.counterID) : startCountDown(item.counterID)} className=''>
-                    {item.isCountingDown ? `Stop` : `Start`}
-                </button>
-                {arrCounter.length > 1 && (
-                  <button  onClick={()=>dispatch(deleteCounter(item.counterID))}> Delete </button>  
-                )}
-            </div>
-        ))}
+        {arrCounter.map((item) => 
+            (
+                <div key={'mtRedux' + item.counterID} >
+                    <br />
+                    <p>Result: {item.value}</p>
+                    <br />
+                    <input type='text' pattern='[0-9]*' size='15' value={item.quantity} name='countQuantity'
+                        onChange={(e) => handleChangeQuantity(e, item.counterID)}
+                    />
+                    <br />
+                    <button className='' onClick={() => dispatch(increment(item.counterID))}>+</button> &nbsp;
+                    <button className='' onClick={() => dispatch(decrement(item.counterID))}>-</button>
+                    <br />
+                    <button onClick={() => item.isCountingDown ? stopCounter(item.counterID) : startCountDown(item.counterID)} className=''>
+                        {item.isCountingDown ? `Stop` : `Start`}
+                    </button>
+                    {arrCounter.length > 1 && (
+                    <button  onClick={()=>dispatch(deleteCounter(item.counterID))}> Delete </button>  
+                    )}
+                </div>
+            )
+        )}
 
     </div>
 )
