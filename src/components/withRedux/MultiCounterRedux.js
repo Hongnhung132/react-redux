@@ -75,29 +75,40 @@ export default function MultiCounterRedux() {
 
 return (
     <div>
-        <button onClick={() => handelAddCounter()}> Add Counter</button>
-        {arrCounter.map((item) => 
+          <div id={"content-wrapper"} className={"flex row vertical-align horizontal-align"}>
+            <h1>Multi Counter in React With Redux</h1>
+            <button  id={"counter-add"} onClick={() => handelAddCounter()}> Add Counter</button>
+
+            {arrCounter.map((item) => 
             (
-                <div key={'mtRedux' + item.counterID} >
-                    <br />
-                    <p>Result: {item.value}</p>
-                    <br />
-                    <input type='text' pattern='[0-9]*' size='15' value={item.quantity} name='countQuantity'
-                        onChange={(e) => handleChangeQuantity(e, item.counterID)}
-                    />
-                    <br />
-                    <button className='' onClick={() => dispatch(increment(item.counterID))}>+</button> &nbsp;
-                    <button className='' onClick={() => dispatch(decrement(item.counterID))}>-</button>
-                    <br />
-                    <button onClick={() => item.isCountingDown ? stopCounter(item.counterID) : startCountDown(item.counterID)} className=''>
-                        {item.isCountingDown ? `Stop` : `Start`}
-                    </button>
-                    {arrCounter.length > 1 && (
-                    <button  onClick={()=>dispatch(deleteCounter(item.counterID))}> Delete </button>  
-                    )}
+
+            <div  id={"counter-wrapper"}  className={"flex column vertical-align justify-sp-ev"} >
+                <h2>Single Counter</h2>
+              <div className={"flex column vertical-align"}>
+                <p>{item.value}</p>
+              </div>
+              <div>
+                <h3>Add / substract custom quantity</h3>
+                <div className={"flex row vertical-align horizontal-align "}>
+                  <input pattern='[0-9]*' type="text" value={item.quantity}  onChange={(e) => handleChangeQuantity(e, item.counterID)} className={"mr-10  mb-10"}/>
+                  <button className={"mr-5 width-40 "}  onClick={() => dispatch(decrement(item.counterID))} > - </button>
+                  <button className={"width-40"}  onClick={() => dispatch(increment(item.counterID))}> + </button>
                 </div>
-            )
-        )}
+              </div>
+
+              <div className={"flex row vertical-align horizontal-align"}>
+              <button onClick={() => item.isCountingDown ? stopCounter(item.counterID) : startCountDown(item.counterID)} id={"counter-start"} className="mr-10">
+                         {item.isCountingDown ? `Stop Counter` : `Start Counter`}
+              </button>
+              {arrCounter.length > 1 && (
+                    <button id={"counter-delete"} onClick={()=>dispatch(deleteCounter(item.counterID))}> Delete Counter</button>  
+                    )}
+              </div>
+             
+
+            </div>
+            ))}
+          </div>
 
     </div>
 )

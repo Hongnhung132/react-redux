@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom'
 export default function Sidebar() {
   return (
     <div>
-        <h2 className='h2'>REACT REDUX COUNTER</h2>
+        
+        <h2 className='h2 mt-5'>REACT COUNTER</h2>
         <div className="pt-3">
         <ul className="nav nav-pills flex-column">
           <li className="nav-item">
@@ -17,7 +18,6 @@ export default function Sidebar() {
           <li className="nav-item">
             <Link to="/singwithredux" className="nav-link"><b>3. SingleCounter - Redux</b></Link>
           </li>
-        
           <li className="nav-item">
             <Link to="/multiwithredux" className="nav-link"><b>4. MultiCounter  -  Redux</b></Link>
           </li>

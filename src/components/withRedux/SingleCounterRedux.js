@@ -35,20 +35,28 @@ function SingleCounterRedux() {
         }
     }, [count])
     return (
-        <div>
-            <div>
-                <p>Result: {count}</p>
-                <br/>
-                <input type='text' pattern='[0-9]*' size='15' value={quantity}  onChange={handleChangeQuantity} name='quantityInput' />
-                <br/>
-                <button aria-label="Increment value" onClick={() => dispatch(increment())}> + </button>
-                <button aria-label="Decrement value" onClick={() => dispatch(decrement())} > - </button>
-                <button onClick={() => isCountingDown? stopCountDown() : startCountDown()} className=''>
-                        {isCountingDown ? `Stop` : `Start`}
-                </button>
-                <br/>
+        <div id={"content-wrapper"} className={"flex column vertical-align horizontal-align"}>
+            <h2>Simple Counter in React With Redux</h2>
+            <div  id={"counter-wrapper"}  className={"flex column vertical-align justify-sp-ev"} >
+              <div className={"flex column vertical-align"}>
+                <p>{count}</p>
+              </div>
+              <div>
+                <h3>Add / substract custom quantity</h3>
+                <div className={"flex row vertical-align horizontal-align "}>
+                  <input pattern='[0-9]*' type="text" value={quantity} onChange={handleChangeQuantity} className={"mr-10  mb-10"}/>
+                  <button className={"mr-5 width-40 "}  onClick={() => dispatch(decrement())} > - </button>
+                  <button className={"width-40"} onClick={() => dispatch(increment())}> + </button>
+                </div>
+              </div>
+
+              <div className={"flex row vertical-align horizontal-align "}>
+              <button onClick={() => isCountingDown? stopCountDown() : startCountDown()} id={"counter-start"} className= {"mr-5"}>
+                         {isCountingDown ? `Stop Counter` : `Start Counter`}
+              </button>
+              </div>
             </div>
-        </div>
+          </div>
     )
 }
 export default SingleCounterRedux;

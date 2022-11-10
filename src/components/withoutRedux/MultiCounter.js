@@ -23,11 +23,13 @@ function MultiCounter() {
     }
     return (
         <div>
-            <button onClick={() => addCounter()}> Add Counter</button>
-            {arrCounter.map((item) => (
-               <SingleCounter key={'mt' + item.id} id={item.id}  deleteCounter={() => deleteCounter(item.id)} showDelete={arrCounter.length>1} />  
-            ))}
-            
+             <div  id={"content-wrapper"}  className={"flex row vertical-align horizontal-align mt-100"}>
+                <h1>Multi Counter in React Without Redux</h1>
+                <button id={'counter-add'} onClick={() => addCounter()}> Add Counter</button>
+                { arrCounter.map((item) => (
+                <SingleCounter key={'mt' + item.id} id={item.id}  deleteCounter={() => deleteCounter(item.id)} showDelete={arrCounter.length>1} />  
+                ))}
+             </div>
         </div>
     )
 }
